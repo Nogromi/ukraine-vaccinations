@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: staging
+    database: vaccinations-ukraine-1
+
+    schema: dataset
+
+    tables:
+      - name: immunizations
+      
