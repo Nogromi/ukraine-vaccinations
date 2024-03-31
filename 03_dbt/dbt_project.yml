@@ -37,4 +37,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 
 models:
   vaccination_ukraine:
-
+    staging:
+        materialized: view
+    core:
+        materialized: table
