@@ -9,9 +9,6 @@ sources:
     tables:
       - name: immunizations
 
-    models
-    
-version: 2
 
 models:
   - name: stg_staging_immunizations
@@ -20,6 +17,12 @@ models:
       - name: temp_immunization_id
         data_type: string
         description: ""
+        test:
+          - unique:
+            severity: warn
+          - not_null:
+            severity: warn
+          
 
       - name: legal_entity_id
         data_type: string
