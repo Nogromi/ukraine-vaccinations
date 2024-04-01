@@ -8,4 +8,65 @@ sources:
 
     tables:
       - name: immunizations
+
+    models
+    
+version: 2
+
+models:
+  - name: stg_staging_immunizations
+    description: ""
+    columns:
+      - name: temp_immunization_id
+        data_type: string
+        description: ""
+
+      - name: legal_entity_id
+        data_type: string
+        description: ""
+
+      - name: division_identifier_value
+        data_type: string
+        description: ""
+
+      - name: vaccine_code
+        data_type: string
+        description: ""
+
+      - name: vaccine_code_description
+        data_type: string
+        description: ""
+
+      - name: patient_age_group
+        data_type: string
+        description: ""
+
+      - name: patient_gender
+        data_type: string
+        description: ""
+
+      - name: manufacturer
+        data_type: string
+        description: ""
+
+      - name: lot_number
+        data_type: string
+        description: ""
+
+      - name: dose_in_ml
+        data_type: float64
+        description: ""
+
+      - name: vaccination_protocol_series
+        data_type: string
+        description: ""
+
+      - name: updated_at
+        data_type: string
+        description: ""
+
+      - name: __index_level_0__
+        data_type: int64
+        description: ""
+
       
