@@ -15,7 +15,7 @@ renamed as (
         vaccine_code,
         {{ get_vaccine_type_description("vaccine_code") }} as vaccine_code_description,
         patient_age_group,
-        patient_gender,
+        {{gender_translate("patient_gender")}} as patient_gender,
         manufacturer,
         lot_number,
         {{ convert_to_ml('dose_quantity_value', 'dose_quantity_unit') }} as dose_in_ml,
