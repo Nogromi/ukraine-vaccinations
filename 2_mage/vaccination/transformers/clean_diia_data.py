@@ -20,6 +20,7 @@ def transform(data, *args, **kwargs):
         Anything (e.g. data frame, dictionary, array, int, str, etc.)
     """
     # Specify your transformation logic here
+
     data=data.loc[ (data['status']=='Запис коректний') & (data['not_given']==False) ]
 
     # remove columns
@@ -39,4 +40,7 @@ def test_output(output, *args) -> None:
     """
     Template code for testing the output of the block.
     """
+    print(output.isna().sum())
+    print(output.shape)
+    print(output.info())
     assert output is not None, 'The output is undefined'

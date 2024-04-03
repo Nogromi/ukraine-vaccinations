@@ -45,8 +45,6 @@ def load_data_from_api(*args, **kwargs):
     parse_dates=['immunization_date','expiration_date','inserted_at','updated_at']
     df = pd.read_csv(download_url, compression='zip', header=0, sep=',', quotechar='"', dtype=data_dtypes , parse_dates=parse_dates)
     # df = pd.read_csv(download_url, compression='zip', header=0, sep=',', quotechar='"')
-    print(df.shape)
-    print(df.info())
     return df
 
 

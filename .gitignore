@@ -9,10 +9,14 @@
 **.json
 **__pycache__/
 .history
-*.csv
+**.csv
 .ipynb_checkpoints/
 *.bin
 *.xml
 secrets.toml
 mlflow.db
 .vscode
+!0_dataload/immunization_legal_entities_info.csv
+**.xlsx
+**.Identifier
+**.zip
