@@ -2,7 +2,7 @@ with
 
 source as (
 
-    select * from {{ source('staging', 'immunizations') }}
+    select * from {{ source('staging', 'vaccination') }}
 
 ),
 
@@ -20,15 +20,13 @@ renamed as (
         lot_number,
         {{ convert_to_ml('dose_quantity_value', 'dose_quantity_unit') }} as dose_in_ml,
         vaccination_protocol_series,
-        updated_at,
-        __index_level_0__
+        vaccination_date
 
     from source
 
 )
 
 select * from renamed
-
 
 -- dbt build --select <model_name> --vars '{'is_test_run': 'false'}'
 {% if var('is_test_run', default=true) %}

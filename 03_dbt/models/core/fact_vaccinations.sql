@@ -1,6 +1,6 @@
 with vaccination as (
     select *, 
-    from {{ ref('stg_staging_immunizations') }}
+    from {{ ref('stg_staging_vaccination') }}
 ),
 legal_entities as (
     select legal_entity_id,
@@ -19,7 +19,7 @@ select  vaccination.temp_immunization_id,
         vaccination.lot_number,
         vaccination.dose_in_ml,
         vaccination.vaccination_protocol_series,
-        vaccination.updated_at,
+        vaccination.vaccination_date,
         legal_entities.registration_settlement
 from vaccination
 inner join legal_entities 
