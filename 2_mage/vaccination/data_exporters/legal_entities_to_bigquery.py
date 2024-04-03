@@ -16,12 +16,12 @@ def export_data_to_big_query(df: DataFrame, **kwargs) -> None:
 
     Docs: https://docs.mage.ai/design/data-loading#bigquery
     """
-    table_name = 'vaccination'
+
+    table_name = 'immunization_legal_entities_info'
     dataset_name = 'dataset'
     project_id = 'vaccinations-ukraine-1'
 
-    table_id = f'{project_id}.{dataset_name}.{table_name}'
-
+    table_id = f'{project_id}.{dataset_name}.{table_name}' 
     config_path = path.join(get_repo_path(), 'io_config.yaml')
     config_profile = 'default'
 

@@ -1,39 +1,51 @@
-if 'data_loader' not in globals():
-    from mage_ai.data_preparation.decorators import data_loader
-if 'test' not in globals():
-    from mage_ai.data_preparation.decorators import test
+from os import path
 import pyarrow as pa
-import pyarrow.parquet as pq 
+import pyarrow.parquet as pq
+from pandas import DataFrame
 import os
 
+if 'data_exporter' not in globals():
+    from mage_ai.data_preparation.decorators import data_exporter
+
+    
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/home/src/sa-vaccination-mage.json'
+project_id = 'vaccination-ukraine-1'
+bucket_name = 'vaccination-ukraine-1'
 
-@data_loader
-def load_data(*args, **kwargs):
+
+@data_exporter
+def export_data(df, *args, **kwargs):
     """
-    Template code for loading data from any source.
+    Exports data to some source.
 
-    Returns:
-        Anything (e.g. data frame, dictionary, array, int, str, etc.)
+    Args:
+        data: The output from the upstream parent block
+        args: The output from any additional upstream blocks (if applicable)
+
+    Output (optional):
+        Optionally return any object and it'll be logged and
+        displayed when inspecting the block run.
     """
-    # Specify your data loading logic here
-    bucket_name = 'vaccination-ukraine-1'
-    project_id = 'vaccination-ukraine-1'
+    # Specify your data exporting logic here
+        # df['tpep_pickup_date'] = df['tpep_pickup_datetime'].dt.date
 
-    table_name = 'immunizations_covid19_4qrt_2023'
-
+    df['date'] = df['updated_at'].dt.date
+    df.drop(columns=['updated_at'], inplace=True)
+    # download_url=kwargs.get('url')
+    # table_name = os.path.basename(download_url).replace('.zip', '')
+    table_name = 'vaccination'
     root_path = f'{bucket_name}/{table_name}'
+    table = pa.Table.from_pandas(df)
+    print("table.schema", table.schema.to_string())
 
-    gcs = pa.fs.GcsFileSystem()  # so here's pyarrow will automatically connect with your credentials that you set above
+    gcs = pa.fs.GcsFileSystem()
 
-    arrow_df = pq.ParquetDataset(root_path, filesystem=gcs)
-    df = arrow_df.read_pandas().to_pandas()
-    return df
+    pq.write_to_dataset(
+        table,
+        root_path=root_path,
+        partition_cols=['date'],
+        filesystem=gcs
+    )
 
 
-@test
-def test_output(output, *args) -> None:
-    """
-    Template code for testing the output of the block.
-    """
-    assert output is not None, 'The output is undefined'
+
