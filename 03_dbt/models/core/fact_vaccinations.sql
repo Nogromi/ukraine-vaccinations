@@ -4,7 +4,9 @@ with vaccination as (
 ),
 legal_entities as (
     select legal_entity_id,
-     registration_settlement
+    registration_settlement,
+    lat,
+    lng
      from {{ ref('dim_legal_entities') }}
     where lat != 0 or lng!= 0
 )
@@ -20,7 +22,9 @@ select  vaccination.temp_immunization_id,
         vaccination.dose_in_ml,
         vaccination.vaccination_protocol_series,
         vaccination.vaccination_date,
-        legal_entities.registration_settlement
+        legal_entities.registration_settlement,
+        legal_entities.lat,
+        legal_entities.lng
 from vaccination
 inner join legal_entities 
 on vaccination.legal_entity_id=legal_entities.legal_entity_id
