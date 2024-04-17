@@ -29,7 +29,7 @@ renamed as (
 
 filtered as (
 select * from renamed 
-where dose_in_ml <100
+where dose_in_ml <200
 )
 
 select * from filtered
