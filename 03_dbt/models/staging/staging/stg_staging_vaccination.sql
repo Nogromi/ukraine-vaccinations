@@ -24,9 +24,15 @@ renamed as (
 
     from source
 
+),
+
+
+filtered as (
+select * from renamed 
+where dose_in_ml <100
 )
 
-select * from renamed
+select * from filtered
 
 -- dbt build --select <model_name> --vars '{'is_test_run': 'false'}'
 {% if var('is_test_run', default=true) %}
