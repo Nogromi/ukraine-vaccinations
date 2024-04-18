@@ -19,8 +19,9 @@ def transform_custom(*args, **kwargs):
     """
     # Specify your custom logic here
 
+    dbt_account_id=kwargs.get('dbt_account_id')
 
-    url = "https://cloud.getdbt.com/api/v2/accounts/255136/jobs/564018/run/"
+    url = f"https://cloud.getdbt.com/api/v2/accounts/{dbt_account_id}/jobs/564018/run/"
     vaccination_mage = os.getenv('vaccination_mage')
 
     headers = {

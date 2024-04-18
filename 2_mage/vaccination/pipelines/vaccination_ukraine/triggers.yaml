@@ -1,0 +1,12 @@
+triggers:
+- envs: []
+  last_enabled_at: 2024-04-14 16:12:53.351989
+  name: harmonic haiku
+  pipeline_uuid: vaccination_ukraine
+  schedule_interval: null
+  schedule_type: null
+  settings: null
+  sla: null
+  start_time: null
+  status: inactive
+  variables: null

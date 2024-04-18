@@ -1,12 +1,13 @@
 
 
 ### Execution
+install [Terraform](https://developer.hashicorp.com/terraform/tutorials/gcp-get-started)
+Ensure GOOGLE_APPLICATION_CREDENTIALS env variable is set. 
 
-Please ensure GOOGLE_APPLICATION_CREDENTIALS env-var is set. (Get your service account fro this)
+
 
 ```shell
-export GOOGLE_APPLICATION_CREDENTIALS="/home/anatolii/credentials/vaccination/key.json"
-export GOOGLE_APPLICATION_CREDENTIALS="<path/to/your/service-account-authkeys>.json"
+export GOOGLE_APPLICATION_CREDENTIALS="/home/anatolii/credentials/vaccination/key.json" # change it to your path
 ```
 
 
@@ -29,6 +30,8 @@ gcloud auth login
 # Set current project if needed 
 gcloud config set project vaccinations-ukraine-1
 ```
+
+In  variables.tf change project id, region, and name of the GCS bucket with your details, build the required cloud resources using Terraform:
 
 ```shell
 # Initialize state file (.tfstate)

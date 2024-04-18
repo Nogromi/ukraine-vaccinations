@@ -3,55 +3,23 @@ blocks:
   color: null
   configuration: {}
   downstream_blocks:
-  - clean_diia_data
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: get_from_diia
-  retry_config: null
-  status: updated
-  timeout: null
-  type: data_loader
-  upstream_blocks: []
-  uuid: get_from_diia
-- all_upstream_blocks_executed: false
-  color: null
-  configuration: {}
-  downstream_blocks:
-  - export_to_gcs_partitioned
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: clean_diia_data
-  retry_config: null
-  status: executed
-  timeout: null
-  type: transformer
-  upstream_blocks:
-  - get_from_diia
-  uuid: clean_diia_data
-- all_upstream_blocks_executed: false
-  color: null
-  configuration: {}
-  downstream_blocks:
   - vaccination_from_gcs
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: export_to_gcs_partitioned
+  name: trigger dataload
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
-  type: data_exporter
-  upstream_blocks:
-  - clean_diia_data
-  uuid: export_to_gcs_partitioned
+  type: data_loader
+  upstream_blocks: []
+  uuid: trigger_dataload
 - all_upstream_blocks_executed: false
   color: null
-  configuration: {}
+  configuration:
+    file_source:
+      path: data_loaders/vaccination_from_gcs.py
   downstream_blocks:
   - vaccination_to_bigquery
   executor_config: null
@@ -64,13 +32,15 @@ blocks:
   timeout: null
   type: data_loader
   upstream_blocks:
-  - export_to_gcs_partitioned
+  - trigger_dataload
   uuid: vaccination_from_gcs
 - all_upstream_blocks_executed: false
   color: null
-  configuration: {}
+  configuration:
+    file_source:
+      path: data_exporters/vaccination_to_bigquery.py
   downstream_blocks:
-  - trigger_dbt_coud
+  - trigger_dbt_cloud
   executor_config: null
   executor_type: local_python
   has_callback: false
@@ -84,33 +54,35 @@ blocks:
   - vaccination_from_gcs
   uuid: vaccination_to_bigquery
 - all_upstream_blocks_executed: false
-  color: blue
-  configuration: {}
+  color: teal
+  configuration:
+    file_source:
+      path: custom/trigger_dbt_cloud.py
   downstream_blocks: []
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: trigger dbt_coud
+  name: trigger_dbt_cloud
   retry_config: null
-  status: executed
+  status: updated
   timeout: null
   type: custom
   upstream_blocks:
   - vaccination_to_bigquery
-  uuid: trigger_dbt_coud
+  uuid: trigger_dbt_cloud
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
 conditionals: []
-created_at: '2024-03-28 13:47:01.996387+00:00'
+created_at: '2024-04-05 19:48:06.173650+00:00'
 data_integration: null
-description: null
+description: orchestrates data load and data export for vaccination project
 executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: vaccination_ukraine
+name: trigger run vaccination
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
@@ -120,8 +92,8 @@ settings:
 spark_config: {}
 tags: []
 type: python
-uuid: vaccination_ukraine
+uuid: trigger_run_vaccination
 variables:
-  url: https://data.gov.ua/dataset/4cced549-1a03-4e0b-afbb-461febb26007/resource/37bdbd0d-88de-4a2e-ae97-c130187681db/download/immunizations_covid19_4qrt_2023.zip
+  dbt_account_id: 255136
 variables_dir: /home/src/mage_data/vaccination
 widgets: []

@@ -29,7 +29,7 @@ def export_data(df, *args, **kwargs):
     # Specify your data exporting logic here
         # df['tpep_pickup_date'] = df['tpep_pickup_datetime'].dt.date
 
-    df['date'] = df['updated_at'].dt.date
+    df['vaccination_date'] = df['updated_at'].dt.date
     df.drop(columns=['updated_at'], inplace=True)
     # download_url=kwargs.get('url')
     # table_name = os.path.basename(download_url).replace('.zip', '')
@@ -43,7 +43,7 @@ def export_data(df, *args, **kwargs):
     pq.write_to_dataset(
         table,
         root_path=root_path,
-        partition_cols=['date'],
+        partition_cols=['vaccination_date'],
         filesystem=gcs
     )
 

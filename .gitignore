@@ -20,3 +20,5 @@ mlflow.db
 **.xlsx
 **.Identifier
 **.zip
+**.env
+!dev.env
