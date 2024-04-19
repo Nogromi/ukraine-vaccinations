@@ -21,6 +21,8 @@ conda env create --file environment.yaml
 - images: screenshots of results
 
 ## Architecture
+   ![Architecture](images/architecture.png)
+
 
 ## Pipeline description
 
@@ -53,9 +55,8 @@ and CI check on Github pull request.
   ### Visualization
   Finally, a dashboard in Looker to explore some data and aggregations. This  dashboard display the gender and age vaccination distribution, manufacturer proportions and highlights the correlation between weekday, The significant decline in vaccination rates occurred on February 24, 2022, coinciding with the commencement of Russia's full-scale invasion of Ukraine.
    
-  Checkout my dashboard:
+  Checkout my [dashboard](https://lookerstudio.google.com/s/lp2c8ZDbDgs):
   ![dashboard](images/visualization.png)
-  Link to the [dashboard](https://lookerstudio.google.com/s/lp2c8ZDbDgs)
 
 
 
